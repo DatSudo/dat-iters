@@ -57,23 +57,28 @@ def main() -> None:
             else:
                 print("--- Wrong input ---")
 
+    print("-"*63)
+    while True:
+        iter_opt = input("Iterative method to use: [J]acobi or [G]auss-Seidel\n>").lower()
+        if iter_opt not in {"j", "g"}:
+            print("--- Type j/J for Jacobi or g/G for Gauss-Seidel ---")
+        else:
+            break
+
     iter = DatIters(matrix_shape, matrix, constants)
 
-    jacobi_result = iter.jacobi()
-    gauss_seidel_result = iter.gauss_seidel()
+    if iter_opt == "j":
+        result = iter.jacobi()
+    else:
+        result = iter.gauss_seidel()
 
     # Print results
     print("="*63)
-    print(f"JACOBI:\n")
+    print(f"RESULT:\n")
     for i in range(matrix_shape):
         print(f"x_{i+1} = ", end="")
-        print(re.sub('[\[\]]', '', np.array_str(jacobi_result[i][0])))
-
-    print("-"*63)
-    print(f"GAUSS-SEIDEL:\n")
-    for i in range(matrix_shape):
-        print(f"x_{i+1} = ", end="")
-        print(re.sub('[\[\]]', '', np.array_str(gauss_seidel_result[i][0])))
+        print(re.sub('[\[\]]', '', np.array_str(result[i][0])))
+    print(f"\nNumber of iterations = {iter.num_iters}")
 
     print("="*63)
 
