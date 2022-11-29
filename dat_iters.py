@@ -48,14 +48,17 @@ class DatIters:
         self.init_values: np.matrix = np.matrix(
                 [[2] for _ in range(matrix_shape)]
         )
-        # self.tolerance: float = 1e-15
-        # self.error: float = 1.0
+        self.tolerance: float = 1e-15
+        self.error: float = 1.0
 
     def jacobi(self) -> np.matrix:
-        for _ in range(ITERATION_LIMIT):
+        while self.error > self.tolerance:
             dx = self.diag_inverse * (
                     self.constants - self.matrix * self.init_values)
             next_values = self.init_values + dx
+
+            e = abs(dx / self.init_values)
+            self.error = max(map(max, e))
             
             self.init_values = next_values
 
