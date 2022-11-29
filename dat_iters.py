@@ -1,8 +1,6 @@
 import numpy as np
 
 
-ITERATION_LIMIT = 10000
-
 INSTRUCTION = """
 ===============================================================
 * Make sure that your equations is already diagonally dominant.
@@ -41,15 +39,14 @@ class DatIters:
                        matrix: np.matrix,
                        constants: np.matrix) -> None:
 
-        self.matrix: np.matrix = matrix
-        self.constants: np.matrix = constants
+        self.matrix = matrix
+        self.constants = constants
         self.diag = np.diag(np.diag(matrix))
-        self.diag_inverse: np.matrix = np.linalg.inv(self.diag)
-        self.init_values: np.matrix = np.matrix(
-                [[2] for _ in range(matrix_shape)]
-        )
-        self.tolerance: float = 1e-15
-        self.error: float = 1.0
+        self.diag_inverse = np.linalg.inv(self.diag)
+        self.init_values = np.matrix([[2] for _ in range(matrix_shape)])
+        self.tolerance = 1e-15
+        self.error = 1.0
+        self.num_iters = 0
 
     def jacobi(self) -> np.matrix:
         while self.error > self.tolerance:
@@ -61,19 +58,23 @@ class DatIters:
             self.error = max(map(max, e))
             
             self.init_values = next_values
+            self.num_iters += 1
 
         return next_values
 
     def gauss_seidel(self) -> np.matrix:
-        for _ in range(ITERATION_LIMIT):
+        while self.error > self.tolerance:
             tri_lower_inverse = np.linalg.inv(np.tril(self.matrix))
             tri_upper = np.triu(self.matrix - self.diag)
 
             next_values = tri_lower_inverse * (
                     self.constants - tri_upper * self.init_values)
 
+            e = abs((next_values - self.init_values) / next_values)
+            self.error = max(map(max, e))
+
             self.init_values = next_values
+            self.num_iters += 1
 
         return next_values
-
 
