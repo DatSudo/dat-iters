@@ -3,6 +3,37 @@ import numpy as np
 
 ITERATION_LIMIT = 10000
 
+INSTRUCTION = """
+===============================================================
+* Make sure that your equations is already diagonally dominant.
+* Inputs in each row (your equation's coefficients) should
+be separated by spaces.
+* Input for constant is the only one constant in your equation.
+
+Examples:
+If you have a system of equations
+
+5x - y + 2z = 1
+3x + 8y -2z = -3
+x + y + 4z = 2
+
+Inputs should be
+
+---------------------------------------------------------------
+Matrix shape: 3 (you have 3 equations, 3 unknown variables)
+---------------------------------------------------------------
+Row 1: 5 -1 2
+Row 1 constant: 1
+---------------------------------------------------------------
+Row 2: 3 8 -2
+Row 2 constant: -3
+---------------------------------------------------------------
+Row 3: 1 1 4
+Row 3 constant: 2
+---------------------------------------------------------------
+===============================================================
+"""
+
 
 class DatIters:
 
