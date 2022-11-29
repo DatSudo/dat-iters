@@ -19,8 +19,7 @@ def main() -> None:
                 matrix[r] = new_row
                 break
             else:
-                print("--- Seems like your matrix is not diagonally \
-                      dominant or is not a square matrix ---")
+                print("--- Seems like your matrix is not diagonally dominant or is not a square matrix ---")
         while True:
             new_const = list(map(float, input(f"Row {r+1} constant: ").split(" ")))
             if len(new_const) == 1:
