@@ -33,15 +33,20 @@ def main() -> None:
     ans1 = iter.jacobi()
     ans2 = iter.gauss_seidel()
 
+    print("-"*30)
     print(f"JACOBI:\n")
     for i in range(matrix_shape):
         print(f"x_{i+1} = ", end="")
         print(re.sub('[\[\]]', '', np.array_str(ans1[i][0])))
+
     print("-"*30)
     print(f"GAUSS-SEIDEL:\n")
     for i in range(matrix_shape):
         print(f"x_{i+1} = ", end="")
         print(re.sub('[\[\]]', '', np.array_str(ans2[i][0])))
+
+    print("-"*30)
+
 
 if __name__ == "__main__":
     main()
