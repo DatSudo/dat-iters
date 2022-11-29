@@ -28,7 +28,7 @@ def main() -> None:
             else:
                 print("--- Wrong input ---")
 
-    iter = DatIters(5, matrix, constants)
+    iter = DatIters(matrix_shape, matrix, constants)
 
     ans1 = iter.jacobi()
     ans2 = iter.gauss_seidel()
