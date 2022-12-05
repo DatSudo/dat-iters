@@ -59,7 +59,7 @@ def main() -> None:
 
     print("-"*63)
     while True:
-        iter_opt = input("Iterative method to use: [J]acobi or [G]auss-Seidel\n>").lower()
+        iter_opt = input("Iterative method to use: [J]acobi or [G]auss-Seidel\n> ").lower()
         if iter_opt not in {"j", "g"}:
             print("--- Type j/J for Jacobi or g/G for Gauss-Seidel ---")
         else:
